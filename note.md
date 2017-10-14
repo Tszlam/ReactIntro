@@ -56,9 +56,11 @@ function ActionLink() {
 
 
 
-
+key应该要在组建被遍历调用的时候定义，而不是在组件的render里定义
+key是不会透传到组件内的，如果要用到key的值的话，通过另一个参数用props传进组件里
 
 
 
 ##问题
 1.组件传入props没有类型检查？
+2.Each child in an array or iterator should have a unique "key" prop.
