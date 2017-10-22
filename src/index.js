@@ -1,37 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+/*
+//组件
 import Clock from './Clock';
 import ClickCounter from './ClickCounter';
 import Welcome from './Welcome';
-
-class List extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            number : this.props.list,
-        };
-    }
-    render(){
-        return (
-            <ul>
-                {this.state.number.map((item)=>(<li key={item+''}>this is number {item*10}</li>))}
-            </ul>
-        )
-    }
-}
-
-class ElistItem extends React.Component{
-    render(){
-        return <li>item : {this.props.item}</li>
-    }
-}
-
-class Elist extends React.Component{
-    render(){
-        return <ul>{this.props.list.map((item,idx)=><ElistItem item={item} key={idx}/>)}</ul>
-    }
-}
 
 const _html = (
     <div>
@@ -45,11 +18,105 @@ const _html = (
     </div>
 );
 
+ReactDOM.render(
+    _html,
+    document.getElementById('root')
+);
+*/
+
+/*
+//未抽象List
+import List from './List';
+
 const list = [1,2,3,4,5];
 
 ReactDOM.render(
-    //_html,
-    //<List list={list}/>,
+    <List list={list}/>,
+    document.getElementById('root')
+);
+*/
+
+/*
+//抽象List
+import Elist from './Elist';
+
+const list = [1,2,3,4,5];
+
+ReactDOM.render(
     <Elist list={list}/>,
+    document.getElementById('root')
+);
+*/
+
+/*
+//form
+import NameInput from'./form';
+
+ReactDOM.render(
+    <NameInput/>,
+    document.getElementById('root')
+);
+*/
+
+/*
+//State Lifing
+import Temp from'./Stateup';
+
+ReactDOM.render(
+    <Temp />,
+    document.getElementById('root')
+);
+*/
+
+/*
+//children
+import Temp from'./Stateup';
+function Parent(props){
+    return (
+        <div>
+            <p>here comes the kid</p>
+            {props.children}
+            {props.top}
+            {props.bottom}
+            {props.tmp}
+        </div>
+    );
+}
+const top = <div><h2>this is top</h2></div>;
+const bottom = <div><h2>this is bottom</h2></div>;
+ReactDOM.render(
+    <Parent top={top} bottom={bottom} tmp={<Temp/>}>
+        <div>
+            <h1>kid~</h1>
+        </div>
+    </Parent>,
+    document.getElementById('root')
+);
+*/
+
+//Children Nesting
+import Dialog from'./Dialog';
+class NameDialog extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            name:''
+        };
+        this.handleInout=this.handleInout.bind(this);
+    }
+    handleInout(e){
+        this.setState({name:e.target.value});
+    }
+    render(){
+        return(
+            <Dialog title="NameDialog" msg="Input Your Name">
+                <p>Name is : {this.state.name}</p>
+                <input value={this.state.name} onChange={this.handleInout}/>
+            </Dialog>
+        );
+    }
+}
+ReactDOM.render(
+    <NameDialog/>,
     document.getElementById('root')
 );
